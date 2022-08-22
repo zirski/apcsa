@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Timeline",
+            "request": "launch",
+            "mainClass": "Timeline",
+            "projectName": "apcsa_b8d62541"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
