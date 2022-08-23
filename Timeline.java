@@ -1,7 +1,7 @@
 public class Timeline {
     public static void main(String[] args){
 
-/*
+
         int[] ages = {6, 8, 10, 12, 14, 16};
         String[] events = {
                             "12/10 - Drove speedboat for the first time in Australia", 
@@ -31,7 +31,7 @@ public class Timeline {
     }
 }
 
-*/
+/* 
     System.out.println("\nAge\t|\tMM/YY - Description");
     System.out.println("\t|\t");
     System.out.println("6\t|\t12/10 - Drove speedboat for the first time in Australia");
@@ -64,3 +64,4 @@ public class Timeline {
 
     }
 }
+*/
