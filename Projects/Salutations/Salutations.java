@@ -5,6 +5,7 @@ public class Salutations {
         name = MyName;
     }
 
+    // prints various addresses and signatures, all for a given name `name`
     public void addressLetter() {
         System.out.println("Dear " + name + ",");
     }
