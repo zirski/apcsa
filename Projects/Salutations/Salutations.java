@@ -10,7 +10,7 @@ public class Salutations {
     }
 
     public void signLetter() {
-        System.out.println("Sincerely," + name);
+        System.out.println("Sincerely, " + name);
     }
 
     public void addressMemo() {
@@ -18,7 +18,7 @@ public class Salutations {
     }
 
     public void signMemo() {
-        System.out.println("Best," + name);
+        System.out.println("Best, " + name);
     }
 
 }
