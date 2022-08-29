@@ -3,5 +3,11 @@ public class SalutationsTester {
         Salutations myLetter = new Salutations("Toby");
 
         myLetter.addressLetter();
+
+        myLetter.addressMemo();
+
+        myLetter.signLetter();
+
+        myLetter.signMemo();
     }
 }
