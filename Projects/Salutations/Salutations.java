@@ -6,7 +6,7 @@ public class Salutations {
     }
 
     public void addressLetter() {
-        System.out.println("Dear" + name);
+        System.out.println("Dear " + name + ",");
     }
 
     public void signLetter() {
