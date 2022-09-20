@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Projects/JavaLab/json-20220320.jar",
+        "Projects/JavaLab/pair-2.2.jar"
+    ]
+}
