@@ -5,7 +5,6 @@ public class GOLPainter extends PainterPlus {
     public GOLPainter() {
         super();
     }
-    
     static int gridSize = 32;
     static boolean[][] Tiles = new boolean[gridSize][gridSize];
 
