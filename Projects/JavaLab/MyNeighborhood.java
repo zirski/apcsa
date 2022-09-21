@@ -1,7 +1,14 @@
 import org.code.neighborhood.Painter;
 
 public class MyNeighborhood {
-  public static void main(String[] args) {
 
+  
+  static GOLPainter myGOLPainter = new GOLPainter();
+
+  public static void main(String[] args) {
+    myGOLPainter.generateWorld();
+
+    myGOLPainter.traverseTiles();
+    
   }
 }

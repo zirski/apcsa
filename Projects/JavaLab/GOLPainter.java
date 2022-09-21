@@ -22,7 +22,7 @@ public class GOLPainter extends PainterPlus {
         Random random = new Random();
 
         //assigns true to numTiles (which in this case is 32) random tiles
-        for (int i = 0; i < numTiles; i++) {
+        for (int i = 0; i < ((numTiles) ^ 2); i++) {
             int randomTilex = random.nextInt(32);
             int randomTiley = random.nextInt(32);
 
@@ -71,7 +71,7 @@ public class GOLPainter extends PainterPlus {
              * "numNeighbors" counter based on such.
             */
 
-            if (v[0] >= 1 && v[0] <= gridSize && v[1] >= 1 && v[1] <= gridSize ) {
+            if (v[0] >= 0 && v[0] < gridSize && v[1] >= 0 && v[1] < gridSize ) {
                 if (Tiles[v[0]][v[1]]) {
                     numNeighbors++;
                 }
@@ -82,19 +82,74 @@ public class GOLPainter extends PainterPlus {
         //below are the four rules to the Game of Life (from wikipedia).
         if (Tiles[a][b] && numNeighbors < 2) {
             Tiles[a][b] = false;
+            if (isOnPaint()) {
+                scrapePaint();
+            }
         }
 
         if (Tiles[a][b] && (numNeighbors == 2 || numNeighbors == 3)) {
             Tiles[a][b] = true;
+            paint("white");
         }
 
         if (Tiles[a][b] && numNeighbors > 3) {
             Tiles[a][b] = false;
+
+            if (isOnPaint()) {
+                scrapePaint();
+            }
         }
 
         if (!Tiles[a][b] && numNeighbors == 3) {
             Tiles[a][b] = true;
+            paint("white");
         }
 
+    }
+
+    public void traverseTiles() {
+        int x = 0;
+        int y = 0;
+        
+        for (int i = 0; i < (gridSize - 1); i++) {
+            for (int j = 0; j < (gridSize - 1); j++) {
+                updateTile(x, y);
+                move();
+    
+                if (getDirection() == "north") {
+                    y--;
+                }
+                if (getDirection() == "east") {
+                    x++;
+                }
+                if (getDirection() == "south") {
+                    y++;
+                }
+                if (getDirection() == "west") {
+                    x--;
+                }
+                
+            }
+
+            if (getDirection() == "west") {
+                turnLeft();
+                move();
+                turnLeft();
+            } else {
+                turnRight();
+                move();
+                turnRight();
+            }
+            
+        }
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < (gridSize - 1); j++) {
+                move();
+            }
+            turnRight();
+        }
+
+        
     }
 }
