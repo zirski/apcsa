@@ -1,5 +1,6 @@
 import java.util.*;
 import javax.swing.Painter;
+import java.lang.Math;
 
 public class GOLPainter extends PainterPlus {
     public GOLPainter() {
@@ -19,14 +20,15 @@ public class GOLPainter extends PainterPlus {
                 Tiles[i][j] = false;
             }
         }
-        Random random = new Random();
 
+        int min = 0;
+        int max = (gridSize - 1);
         //assigns true to numTiles (which in this case is 32) random tiles
-        for (int i = 0; i < ((numTiles) ^ 2); i++) {
-            int randomTilex = random.nextInt(32);
-            int randomTiley = random.nextInt(32);
+        for (int i = 0; i < numTiles; i++) {
+            int randomTileX = (int)(Math.random()*(max - min + 1) + min);
+            int randomTileY = (int)(Math.random()*(max - min + 1) + min);
 
-            Tiles[randomTilex][randomTiley] = true;
+            Tiles[randomTileX][randomTileY] = true;
         }
     }
 
@@ -151,5 +153,55 @@ public class GOLPainter extends PainterPlus {
         }
 
         
+    }
+
+    public void seedTiles() {
+        int x = 0;
+        int y = 0;
+        
+        for (int i = 0; i < (gridSize - 1); i++) {
+            for (int j = 0; j < (gridSize - 1); j++) {
+                if (Tiles[x][y]) {
+                    paint("white");
+                }
+                move();
+    
+                if (getDirection() == "north") {
+                    y--;
+                }
+                if (getDirection() == "east") {
+                    x++;
+                }
+                if (getDirection() == "south") {
+                    y++;
+                }
+                if (getDirection() == "west") {
+                    x--;
+                }
+            }
+
+            if (getDirection() == "west") {
+                turnLeft();
+                move();
+                if (Tiles[x][y]) {
+                    paint("white");
+                }
+                turnLeft();
+            } else {
+                turnRight();
+                move();
+                if (Tiles[x][y]) {
+                    paint("white");
+                }
+                turnRight();
+            }
+        }
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < (gridSize - 1); j++) {
+                move();
+            }
+            turnRight();
+        }
     }
 }
