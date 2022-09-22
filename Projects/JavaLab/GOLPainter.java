@@ -9,7 +9,7 @@ public class GOLPainter extends PainterPlus {
 
     public void generateWorld() {
 
-        //creating a matrix of booleans; the boolean for each tile acts as our "isAlive" state
+        //creating a matrix of booleans; the boolean for each tile acts as our "is alive" state
         for (int i = 0; i < Tiles.length; i++) {
             for (int j = 0; j < Tiles.length; j++) {
                 //this adds a boolean for each tile in the matrix (the "grid" in Java lab)
@@ -17,10 +17,11 @@ public class GOLPainter extends PainterPlus {
             }
         }
 
+        int numStartingTiles = 60;
         int min = 0;
         int max = (gridSize - 1);
-        //assigns true to numTiles (which in this case is 32) random tiles
-        for (int i = 0; i < Tiles.length; i++) {
+        //assigns true to a random selection of tiles; we can change the number of starting "alive" tiles using numTiles.
+        for (int i = 0; i < numStartingTiles; i++) {
             int randomTileX = (int)(Math.random()*(max - min + 1) + min);
             int randomTileY = (int)(Math.random()*(max - min + 1) + min);
     
