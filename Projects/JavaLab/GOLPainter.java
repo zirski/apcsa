@@ -24,10 +24,10 @@ public class GOLPainter extends PainterPlus {
         int min = 0;
         int max = (gridSize - 1);
         //assigns true to numTiles (which in this case is 32) random tiles
-        for (int i = 0; i < numTiles; i++) {
+        for (int i = 0; i < Tiles.length; i++) {
             int randomTileX = (int)(Math.random()*(max - min + 1) + min);
             int randomTileY = (int)(Math.random()*(max - min + 1) + min);
-
+    
             Tiles[randomTileX][randomTileY] = true;
         }
     }
@@ -134,12 +134,16 @@ public class GOLPainter extends PainterPlus {
             }
 
             if (getDirection() == "west") {
+                updateTile(x, y);
                 turnLeft();
                 move();
+                updateTile(x, y);
                 turnLeft();
             } else {
+                updateTile(x, y);
                 turnRight();
                 move();
+                updateTile(x, y);
                 turnRight();
             }
             
@@ -166,23 +170,22 @@ public class GOLPainter extends PainterPlus {
                 }
                 move();
     
-                if (getDirection() == "north") {
-                    y--;
-                }
                 if (getDirection() == "east") {
                     x++;
                 }
-                if (getDirection() == "south") {
-                    y++;
-                }
+
                 if (getDirection() == "west") {
                     x--;
                 }
+
+                //System.out.println("Coords: " + x + ", " + y);
             }
 
             if (getDirection() == "west") {
                 turnLeft();
                 move();
+                y++;
+
                 if (Tiles[x][y]) {
                     paint("white");
                 }
@@ -190,6 +193,8 @@ public class GOLPainter extends PainterPlus {
             } else {
                 turnRight();
                 move();
+                y++;
+
                 if (Tiles[x][y]) {
                     paint("white");
                 }
