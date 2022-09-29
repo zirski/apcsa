@@ -1,5 +1,3 @@
-import java.util.*;
-import javax.swing.Painter;
 import java.lang.Math;
 
 public class GOLPainter extends PainterPlus {
@@ -9,11 +7,9 @@ public class GOLPainter extends PainterPlus {
     static int gridSize = 32;
     static boolean[][] Tiles = new boolean[gridSize][gridSize];
 
-    
     public void generateWorld() {
-        int numTiles = gridSize;
 
-        //creating a matrix of booleans; the boolean for each tile acts as our "isAlive" state
+        //creating a matrix of booleans; the boolean for each tile acts as our "is alive" state
         for (int i = 0; i < Tiles.length; i++) {
             for (int j = 0; j < Tiles.length; j++) {
                 //this adds a boolean for each tile in the matrix (the "grid" in Java lab)
@@ -21,17 +17,16 @@ public class GOLPainter extends PainterPlus {
             }
         }
 
+        int numStartingTiles = 60;
         int min = 0;
         int max = (gridSize - 1);
-        // assigns true to numTiles (which in this case is 32) random tiles
-        for (int i = 0; i < numTiles; i++) {
-            for (int j = 0; j < Tiles.length; j++) {
-                Tiles[i][j] = true;
-            }
+        //assigns true to a random selection of tiles; we can change the number of starting "alive" tiles using numTiles.
+        for (int i = 0; i < numStartingTiles; i++) {
+            int randomTileX = (int)(Math.random()*(max - min + 1) + min);
+            int randomTileY = (int)(Math.random()*(max - min + 1) + min);
+    
+            Tiles[randomTileX][randomTileY] = true;
         }
-
-
-
     }
 
     public void updateTile(int a, int b) {
@@ -59,9 +54,9 @@ public class GOLPainter extends PainterPlus {
         /*
          * this for loop, for each row in our "check" matrix, iterates through
          * each value. the array "v" only has two elements: the x and y coordinates for
-         * each neighboring tile (a-1, b-1 --> which references position 1.)
+         * each neighboring tile (e.g., a-1, b-1 --> which references position 1.)
          * 
-         * This allows us to look up each column of the matrix by index, since 
+         * This allows us to look up each row of the matrix by index, since 
          * java does not inherently create key/value pairs for each element in an
          * array.
         */
@@ -70,7 +65,8 @@ public class GOLPainter extends PainterPlus {
 
             /*
              * This first checks to see if the selected cell is in the bounds of our
-             * matrix. Then, the if statement, for each position around the selected 
+             * matrix (and by extension, our 32x32 grid which the GOLPainter moves in). 
+             * Then, the if statement, for each position around the selected 
              * tile (a, b), evaluates their "Tiles[i][j]" boolean and adds 1 to the 
              * "numNeighbors" counter based on such.
             */
@@ -80,83 +76,81 @@ public class GOLPainter extends PainterPlus {
                     numNeighbors++;
                 }
             }
-
         }
-
         //below are the four rules to the Game of Life (from wikipedia).
+        
+        //Any live cell with fewer than two live neighbours dies, as if by underpopulation.
         if (Tiles[a][b] && numNeighbors < 2) {
             Tiles[a][b] = false;
-            if (isOnPaint()) {
-                scrapePaint();
-            }
+            scrapePaint();
         }
 
+        //Any live cell with two or three live neighbours lives on to the next generation.
         if (Tiles[a][b] && (numNeighbors == 2 || numNeighbors == 3)) {
             Tiles[a][b] = true;
-            paint("white");
         }
 
+        //Any live cell with more than three live neighbours dies, as if by overpopulation.
         if (Tiles[a][b] && numNeighbors > 3) {
             Tiles[a][b] = false;
-
-            if (isOnPaint()) {
-                scrapePaint();
-            }
+            scrapePaint();
         }
 
+        //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
         if (!Tiles[a][b] && numNeighbors == 3) {
             Tiles[a][b] = true;
             paint("white");
         }
-
     }
 
     public void traverseTiles() {
         int x = 0;
         int y = 0;
         
+        // this nested for loop acts as our entire movement procedure throughout the grid.
         for (int i = 0; i < (gridSize - 1); i++) {
             for (int j = 0; j < (gridSize - 1); j++) {
                 updateTile(x, y);
                 move();
     
-                if (getDirection() == "north") {
-                    y--;
-                }
                 if (getDirection() == "east") {
                     x++;
-                }
-                if (getDirection() == "south") {
-                    y++;
                 }
                 if (getDirection() == "west") {
                     x--;
                 }
-                
             }
 
+            // This is for when the painter hits an edge of the grid
             if (getDirection() == "west") {
+                updateTile(x, y);
                 turnLeft();
                 move();
+                y++;
+                updateTile(x, y);
                 turnLeft();
             } else {
+                updateTile(x, y);
                 turnRight();
                 move();
+                y++;
+                updateTile(x, y);
                 turnRight();
             }
-            
         }
 
+        //This is our "cleanup" stage, where the painter reaches the end of the grid's tiles and needs to reset for another cycle.
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < (gridSize - 1); j++) {
                 move();
             }
             turnRight();
         }
-
-        
     }
 
+    /* This method is for "seeding" the random selection of "alive" tiles in generateWorld(). Here, the painter does basically the
+     * same thing as in traverseTiles(), but doesn't update the tiles it is on.
+     */
     public void seedTiles() {
         int x = 0;
         int y = 0;
@@ -168,15 +162,10 @@ public class GOLPainter extends PainterPlus {
                 }
                 move();
     
-                if (getDirection() == "north") {
-                    y--;
-                }
                 if (getDirection() == "east") {
                     x++;
                 }
-                if (getDirection() == "south") {
-                    y++;
-                }
+
                 if (getDirection() == "west") {
                     x--;
                 }
@@ -185,6 +174,8 @@ public class GOLPainter extends PainterPlus {
             if (getDirection() == "west") {
                 turnLeft();
                 move();
+                y++;
+
                 if (Tiles[x][y]) {
                     paint("white");
                 }
@@ -192,6 +183,8 @@ public class GOLPainter extends PainterPlus {
             } else {
                 turnRight();
                 move();
+                y++;
+
                 if (Tiles[x][y]) {
                     paint("white");
                 }
