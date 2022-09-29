@@ -35,5 +35,7 @@ public class GuessTheNumber {
         }
         System.out.println("Correct!");
 
+        input.close();
+
     }
 }
