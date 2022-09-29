@@ -23,13 +23,15 @@ public class GOLPainter extends PainterPlus {
 
         int min = 0;
         int max = (gridSize - 1);
-        //assigns true to numTiles (which in this case is 32) random tiles
+        // assigns true to numTiles (which in this case is 32) random tiles
         for (int i = 0; i < numTiles; i++) {
-            int randomTileX = (int)(Math.random()*(max - min + 1) + min);
-            int randomTileY = (int)(Math.random()*(max - min + 1) + min);
-
-            Tiles[randomTileX][randomTileY] = true;
+            for (int j = 0; j < Tiles.length; j++) {
+                Tiles[i][j] = true;
+            }
         }
+
+
+
     }
 
     public void updateTile(int a, int b) {
