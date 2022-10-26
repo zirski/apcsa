@@ -15,9 +15,7 @@ public class GuessTheNumber {
         // This calls the static method GuessMyNumber. Notice that the method is outside 
         // of the main method. 
         guessMyNumber();
-        
     }
-    
     public static void guessMyNumber() {   
         System.out.println("Enter your guess:");
         
@@ -34,8 +32,6 @@ public class GuessTheNumber {
             guess = input.nextInt();
         }
         System.out.println("Correct!");
-
         input.close();
-
     }
 }
