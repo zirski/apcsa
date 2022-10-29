@@ -4,16 +4,17 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("---------------------Title screen---------------------");
-        System.out.println("\nOptions:\t1. Make new License");
+        System.out.println("\nOptions:\t1. Make new License\t2. Check License");
+
         usrHeading();
+        Scanner sc = new Scanner(System.in);
         
         int i = sc.nextInt();
         if (i == 1) {
             makeLicense();
         } else {
-            System.out.println("Please enter a valid option.");
+            checkLicense();
         }
         sc.close();
     }
@@ -23,32 +24,48 @@ public class App {
     }
 
     public static void makeLicense() {
-        System.out.println("Please select 2 products:");
+        System.out.println("Please select products:");
         System.out.println("\n1. Canvas\t2. Darkroom\t3. Marketplace\t4. Collage");
         usrHeading();
 
-        String[] products = {"Canvas", "Darkroom", "marketplace", "Collage"};
-        
-        ArrayList<Integer> choices = new ArrayList<Integer>(0);
-        
-        Scanner choiceSc = new Scanner(System.in);
-        String choiceString = choiceSc.next();
-        choiceSc.close();
+        Product[] products = new Product[4];
 
-        Scanner sc = new Scanner(choiceString).useDelimiter(", ");
+        products[0] = new Product("canvas", 15.00);
+        products[1] = new Product("darkroom", 12.00);
+        products[2] = new Product("marketplace", 20.00);
+        products[3] = new Product("collage", 18.00);
+        
+        ArrayList<Integer> arliChoices = new ArrayList<Integer>(0);
+        
+        Scanner sc = new Scanner(System.in);
+        String choices = sc.nextLine();
 
-        while (sc.hasNext()) {
-            String choice = sc.next();
-            int choicetoInt = Integer.parseInt(choice);
-            choices.add(choicetoInt);
+        Scanner strSc = new Scanner(choices);
+        while (strSc.hasNext()) {
+            arliChoices.add(strSc.nextInt());
         }
-        sc.close();
+        strSc.close();
 
-        System.out.println(choices);
-
-        // Product[] choices = new Product[2];
         
-        // License myLicense = new License(null, null);
+        Product[] myChoices = new Product[arliChoices.size()];
+        
+        for (int i = 0; i < arliChoices.size(); i++) {
+            myChoices[i] = products[arliChoices.get(i)];
+        }
+        
+        System.out.println("Please select your plan:");
+        System.out.println("\n1. Monthly\t2. Semiannually\t3. annually");
+        usrHeading();
+        
+        int choice = sc.nextInt();
+        sc.close();
+        
+        
+        Plan myPlan = new Plan(choice);
+        License myLicense = new License(myChoices, myPlan);
+    }
+
+    public static void checkLicense() {
         
     }
 }

@@ -1,13 +1,14 @@
 public class Product {
+    public String name;
     public double price;
 
-    public Product(double price) {
+    public Product(String name, double price) {
+        this.name = name;
         this.price = price;
     }
 
-    Product canvas = new Product(15.00);
-    Product darkroom = new Product(12.00);
-    Product marketplace = new Product(20.00);
-    Product collage = new Product(18.00);
+    public String toString() {
+        return name;
+    }
 
 }
