@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "apcsa_31bb806c"
+        },
+        {
+            "type": "java",
             "name": "Launch GuessTheNumber",
             "request": "launch",
             "mainClass": "GuessTheNumber",
