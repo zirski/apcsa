@@ -1,39 +1,60 @@
 public class Plan {
-    private billingPeriod billingPeriod;
+    private int billingPeriod;
     private double discount;
 
-    public Plan(billingPeriod billingPeriod) {
+    public Plan(int billingPeriod) {
         this.billingPeriod = billingPeriod;
-
-        if (billingPeriod == monthly) {
+        
+        if (billingPeriod == 1) {
             discount = 0;
-        } else if (billingPeriod == semiannually) {
+        } else if (billingPeriod == 2) {
             discount = 0.10;
-        } else if (billingPeriod == annually) {
+        } else if (billingPeriod == 3) {
             discount = 0.20;
         }
     }
-
-    billingPeriod monthly = new billingPeriod("monthly", 12);
-    billingPeriod semiannually = new billingPeriod("semiannually", 6);
-    billingPeriod annually = new billingPeriod("annually", 1);
 
     public double getDiscount() {
         return discount;
     }
 
-    public billingPeriod getBillingPeriod() {
-        return billingPeriod;
+    public String toString() {
+        return "Billing Period: " + billingPeriod + "\nDiscount: " + discount;
     }
 
-    class billingPeriod {
-        private String name;
-        private int paymentsPerYear;
+
+    // private billingPeriod billingPeriod;
+    // private double discount;
+
+    // public Plan(billingPeriod billingPeriod) {
+    //     this.billingPeriod = billingPeriod;
+
+    //     if (billingPeriod == monthly) {
+    //         discount = 0;
+    //     } else if (billingPeriod == semiannually) {
+    //         discount = 0.10;
+    //     } else if (billingPeriod == annually) {
+    //         discount = 0.20;
+    //     }
+    // }
+
+    // billingPeriod myBillingPeriod = new billingPeriod(6);
+    // billingPeriod myBillingPeriod = new billingPeriod(1);
+
+    // public double getDiscount() {
+    //     return discount;
+    // }
+
+    // public billingPeriod getBillingPeriod() {
+    //     return billingPeriod;
+    // }
+
+    // class billingPeriod {
+    //     private int paymentsPerYear;
     
-        private billingPeriod(String name, int paymentsPerYear) {
-            this.name = name;
-            this.paymentsPerYear = paymentsPerYear;
-        }
-    }
+    //     private billingPeriod(int paymentsPerYear) {
+    //         this.paymentsPerYear = paymentsPerYear;
+    //     }
+    // }
 }
 

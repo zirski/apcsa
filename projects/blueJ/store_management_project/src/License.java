@@ -21,4 +21,12 @@ public class License {
 
         return licenseCost;
     }
+
+    public String toString() {
+        String productsToString = null;
+        for (int i = 0; i < products.length; i++) {
+            productsToString += products[i].toString();
+        }
+        return "Products: " + productsToString + "\nPlan: " + plan.toString();
+    }
 }
