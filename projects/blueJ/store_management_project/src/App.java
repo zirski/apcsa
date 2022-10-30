@@ -5,7 +5,7 @@ public class App {
     public static void main(String[] args) {
 
         System.out.println("---------------------Title screen---------------------");
-        System.out.println("\nOptions:\t1. Make new License\t2. Check License");
+        System.out.println("\nOptions:\t1. Make new License");
 
         usrHeading();
         Scanner sc = new Scanner(System.in);
@@ -13,6 +13,15 @@ public class App {
         int i = sc.nextInt();
         if (i == 1) {
             makeLicense();
+        } else {
+            System.out.println("Please enter a valid option.");
+        }
+
+        System.out.println("Options:\t1. Delete License\t2. Check License");
+
+        i = sc.nextInt();
+        if (i == 1) {
+            //do stuff
         } else {
             checkLicense();
         }
@@ -60,12 +69,13 @@ public class App {
         int choice = sc.nextInt();
         sc.close();
         
-        
         Plan myPlan = new Plan(choice);
         License myLicense = new License(myChoices, myPlan);
     }
 
     public static void checkLicense() {
+        System.out.println("License:");
+        //System.out.println("Products:\t" + myLicense.toString());
         
     }
 }
