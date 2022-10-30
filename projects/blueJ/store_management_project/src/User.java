@@ -15,10 +15,10 @@ public class User {
 
         Product[] products = new Product[4];
 
-        products[0] = new Product("canvas", 15.00);
-        products[1] = new Product("darkroom", 12.00);
-        products[2] = new Product("marketplace", 20.00);
-        products[3] = new Product("collage", 18.00);
+        products[0] = new Product("Canvas", 15.00);
+        products[1] = new Product("Darkroom", 12.00);
+        products[2] = new Product("Marketplace", 20.00);
+        products[3] = new Product("Collage", 18.00);
         
         ArrayList<Integer> arliChoices = new ArrayList<Integer>(0);
         
@@ -39,19 +39,20 @@ public class User {
         }
         
         System.out.println("Please select your payment plan:");
-        System.out.println("\n1. Monthly\t2. Semiannually\t3. annually");
+        System.out.println("\n1. Monthly\t2. Semiannually\t3. Annually");
         System.out.print("usr: ");
         
         int choice = sc.nextInt();
         
         Plan myPlan = new Plan(choice);
+
+        
         License myLicense = new License(myChoices, myPlan);
         license = myLicense;
     }
 
     public void checkLicense() {
-        System.out.println("License:");
-        System.out.println("Products:\t" + license.toString());
-        
+        System.out.println("------------------------License-----------------------");
+        System.out.println("Products ->\n\t" + license.toString());
     }
 }

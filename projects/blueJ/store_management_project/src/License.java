@@ -28,10 +28,10 @@ public class License {
     }
 
     public String toString() {
-        String productsToString = null;
+        String productsToString = "";
         for (int i = 0; i < products.length; i++) {
-            productsToString += products[i].toString();
+            productsToString += products[i].toString() + ", ";
         }
-        return "Products: " + productsToString + "\nPlan: " + plan.toString();
+        return productsToString + "\nPlan ->\n\t" + plan.toString();
     }
 }

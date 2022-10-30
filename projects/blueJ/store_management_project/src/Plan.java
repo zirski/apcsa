@@ -19,7 +19,7 @@ public class Plan {
     }
 
     public String toString() {
-        return "Billing Period: " + billingPeriod + "\nDiscount: " + discount;
+        return "Billing Period: " + billingPeriod + "\n\tDiscount: " + discount;
     }
 
 
