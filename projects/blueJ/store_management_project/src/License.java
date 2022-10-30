@@ -2,6 +2,11 @@ public class License {
     private Product[] products = new Product[2];
     private Plan plan;
 
+    public License() {
+        products = null;
+        plan = null;
+    }
+    
     public License(Product[] products, Plan plan) {
         this.products = products;
         this.plan = plan;
