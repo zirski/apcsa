@@ -66,7 +66,8 @@ public class User {
 
         //License created!
         License myLicense = new License(myProducts, myPlan);
-        license = myLicense;
+        // license = myLicense;
+        this.setLicense(myLicense);
     }
 
     public void buildFromPreset() {
@@ -110,5 +111,9 @@ public class User {
     public void checkLicense() {
         System.out.println("------------------------License-----------------------");
         System.out.println("Products ->\n\t" + this.license.toString());
+    }
+
+    public void setLicense(License license) {
+        this.license = license;
     }
 }

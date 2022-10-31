@@ -1,7 +1,12 @@
 public class Plan {
     private int billingPeriod;
     private double discount;
-
+    
+    public Plan() {
+        billingPeriod = 0;
+        discount = 0.0;
+    }
+    
     public Plan(int billingPeriod) {
         this.billingPeriod = billingPeriod;
         
@@ -21,6 +26,14 @@ public class Plan {
     
     public int getBillingPeriod() {
         return billingPeriod;
+    }
+
+    public void setBillingPeriod(int billingPeriod) {
+        this.billingPeriod = billingPeriod;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     //this is so the user actually sees which billing period they entered, not just the option number (1, 2, 3)
