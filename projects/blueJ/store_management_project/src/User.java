@@ -68,6 +68,7 @@ public class User {
         License myLicense = new License(myProducts, myPlan);
         // license = myLicense;
         this.setLicense(myLicense);
+        sc.close();
     }
 
     public void buildFromPreset() {
@@ -106,6 +107,7 @@ public class User {
 
         //handy that you can assign a subclass to a superclass variable
         license = myPreset;
+        sc.close();
     }
 
     public void checkLicense() {

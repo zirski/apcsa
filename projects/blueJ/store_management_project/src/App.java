@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
+        System.setIn(new UnClosableDecorator(System.in));
         //starting value for license; for some reason java throws an error when an argument isn't already initialized
         License myLicense = null;
         User myUser = new User(myLicense);
@@ -15,6 +17,7 @@ public class App {
         int i = sc.nextInt();
         if (i == 1) {
             System.out.println("Options: 1. Build from Preset\t2. Make your own");
+            System.out.print("usr: ");
             i = sc.nextInt();
             
             if (i == 1) {
@@ -27,6 +30,7 @@ public class App {
         }
 
         System.out.println("Options:\t1. Delete License\t2. Check License");
+        System.out.print("usr: ");
 
         i = sc.nextInt();
         if (i == 1) {
