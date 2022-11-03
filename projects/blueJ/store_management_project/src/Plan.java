@@ -25,7 +25,17 @@ public class Plan {
     }
     
     public int getBillingPeriod() {
-        return billingPeriod;
+        int newBillingPeriod = 0;
+
+        if (billingPeriod == 1) {
+            newBillingPeriod = 12;
+        } else if (billingPeriod == 2) {
+            newBillingPeriod = 6;
+        } else if (billingPeriod == 3) {
+            newBillingPeriod = 1;
+        }
+        
+        return newBillingPeriod;
     }
 
     public void setBillingPeriod(int billingPeriod) {

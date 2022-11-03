@@ -56,7 +56,7 @@ public class User {
         }
         
         System.out.println("Please select your payment plan:");
-        System.out.println("\n1. Monthly\t2. Semiannually\t3. Annually");
+        System.out.println("\n1. Monthly (No discount)\t2. Semiannually (10% discount per product)\t3. Annually (20% discount per product)");
         System.out.print("usr: ");
         
         int choice = sc.nextInt();
