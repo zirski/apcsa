@@ -8,7 +8,7 @@ public class App {
         License myLicense = null;
         User myUser = new User(myLicense);
 
-        System.out.println("---------------------Title screen---------------------");
+        System.out.println("-------------Welcome to GenCS User Portal!------------");
         System.out.println("\nOptions:\t1. Make new License");
         //you'll see this a lot - user heading (kind of like "$" in bash)
         System.out.print("usr: ");

@@ -1,5 +1,5 @@
 public class Product {
-    public String name;
+    private String name;
     public double price;
 
     public Product(String name, double price) {

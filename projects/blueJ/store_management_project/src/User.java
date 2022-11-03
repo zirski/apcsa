@@ -76,23 +76,23 @@ public class User {
         Scanner sc = new Scanner(System.in);
         
         Preset[] presets = new Preset[2];
-        Product[] allProducts = new Product[4];
+        Product[] products = new Product[4];
 
         Plan presetPlan = new Plan(1);
     
-        allProducts[0] = new Product("Canvas", 15.00);
-        allProducts[1] = new Product("Darkroom", 12.00);
-        allProducts[2] = new Product("Marketplace", 20.00);
-        allProducts[3] = new Product("Collage", 18.00);
+        products[0] = new Product("Canvas", 15.00);
+        products[1] = new Product("Darkroom", 12.00);
+        products[2] = new Product("Marketplace", 20.00);
+        products[3] = new Product("Collage", 18.00);
 
         //I kind of slapped this bit together - definitely a better way of doing this
         Product[] photoProducts = new Product[2];
-        photoProducts[0] = allProducts[1];
-        photoProducts[1] = allProducts[2];
+        photoProducts[0] = products[1];
+        photoProducts[1] = products[2];
 
         //this creates two presets that the user can choose from - with our selected products
-        presets[0] = new Preset("Full", allProducts, presetPlan);
-        presets[1] = new Preset("Photo", photoProducts, presetPlan);
+        presets[0] = new Preset(products, presetPlan, "Full");
+        presets[1] = new Preset(photoProducts, presetPlan, "Photo");
 
         System.out.println("Please select your preset: ");
         System.out.println("1. Full (all products)\t2. Photo (Darkroom & Marketplace)");

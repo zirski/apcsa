@@ -39,6 +39,6 @@ public class License {
         }
 
         //actually upset about this - above methods to calc actual price don't work for some reason
-        return productsToString.substring(0, (productsToString.length() - 2)) + "\nPlan ->\n\t" + plan.toString(); //+ "\n\nTotal Price per Billing Period -> " + this.calcLicenseCost();
+        return productsToString.substring(0, (productsToString.length() - 2)) + "\nPlan ->\n\t" + plan.toString() + "\n\nTotal Price per Billing Period -> " + this.calcLicenseCost();
     }
 }
