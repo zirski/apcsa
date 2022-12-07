@@ -6,6 +6,8 @@ import java.util.Scanner;
  */
 public class User {
     private License license;
+    public String page;
+    public String previousPage;
 
     public User(License license) {
         this.license = license;
@@ -60,19 +62,28 @@ public class User {
         System.out.print("usr: ");
         
         int choice = sc.nextInt();
+        Plan myPlan = null;
         
-        
-        Plan myPlan = new Plan(choice);
+        while (true) {
+            if (choice < 4) {
+                myPlan = new Plan(choice);
+                break;
+            } else {
+                System.out.println("Please enter a valid option");
+            }
+        }
 
         //License created!
         License myLicense = new License(myProducts, myPlan);
         // license = myLicense;
         this.setLicense(myLicense);
         sc.close();
+
+        toPage("finalOptions");
     }
 
     public void buildFromPreset() {
-        Preset myPreset;
+        Preset myPreset = null;
         Scanner sc = new Scanner(System.in);
         
         Preset[] presets = new Preset[2];
@@ -94,28 +105,54 @@ public class User {
         presets[0] = new Preset(products, presetPlan, "Full");
         presets[1] = new Preset(photoProducts, presetPlan, "Photo");
 
-        System.out.println("Please select your preset: ");
+        System.out.println("Please select your preset: (Or type \"3\" to go back)");
         System.out.println("1. Full (all products)\t2. Photo (Darkroom & Marketplace)");
         System.out.print("usr: ");
 
         int i = sc.nextInt();
         if (i == 1) {
             myPreset = presets[0];
-        } else {
+        } else if (i == 2) {
             myPreset = presets[1];
+        } else {
+            System.out.println("Please enter a valid option");
         }
 
         //handy that you can assign a subclass to a superclass variable
         license = myPreset;
         sc.close();
+
+        toPage("finalOptions");
     }
 
     public void checkLicense() {
-        System.out.println("------------------------License-----------------------");
-        System.out.println("Products ->\n\t" + this.license.toString());
+        if (license == null) {
+            System.out.println("Whoops, nothing here!");
+        } else {
+            Scanner sc = new Scanner(System.in);
+            
+            System.out.println("------------------------License-----------------------");
+            System.out.println("Products ->\n\t" + this.license.toString());
+            System.out.println("Options:\t1. Delete License\t2. Exit to Home");
+            int i = sc.nextInt();
+            if (i == 1) {
+                toPage("finalOptions");
+            } else if (i == 2) {
+                toPage("start");
+            }
+        }
     }
 
     public void setLicense(License license) {
         this.license = license;
+    }
+
+    public void toPage(String newPage) {
+        this.previousPage = this.page;
+        this.page = newPage;
+    }
+
+    public void toPrevious() {
+        this.page = this.previousPage;
     }
 }
