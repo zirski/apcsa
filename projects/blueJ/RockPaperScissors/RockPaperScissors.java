@@ -15,7 +15,7 @@ public class RockPaperScissors {
 				String sysChoice = choices[Randomizer.nextInt(0, 2)];
 				System.out.println("\nUser: " + usrChoice);
 				System.out.println("System: " + sysChoice);
-				System.out.println(getWinner(usrChoice.split(" ").toString(), sysChoice));
+				System.out.println(getWinner(usrChoice, sysChoice));
 			}
 		}
 	}
@@ -26,9 +26,14 @@ public class RockPaperScissors {
 		String p = "paper";
 		String s = "scissors";
 		
-		if ((user == r && computer == s) || (user == p && computer == r) || (user == s && computer == p)) {
+		/*
+		 * turns out I'm dumb and I forgot what reference types are. A little ChatGPT (or just as likely Ben, 
+		 * basically the same thing in this case) helped me see what was right in front of my 
+		 * face.
+		 */
+		if ((user.equalsIgnoreCase(r) && computer.equalsIgnoreCase(s)) || (user.equalsIgnoreCase(p) && computer.equalsIgnoreCase(r)) || (user.equalsIgnoreCase(s) && computer.equalsIgnoreCase(p))) {
 			return "User wins!";
-		} else if (user == computer) {
+		} else if (user.equals(computer)) {
 			return "Tie!";
 		} else {
 			return "Computer wins!";
