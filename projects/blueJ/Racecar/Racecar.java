@@ -12,7 +12,7 @@ public class Racecar {
     }
     
     public double computeTime() {
-        return HUNTINGTON_CONSTANT * Math.cbrt(this.weight / this.power);
+        return HUNTINGTON_CONSTANT * Math.cbrt(weight / power);
     }
     
     public String toString() {
@@ -38,18 +38,16 @@ public class Racecar {
         // 4. Call the computeTime method on each object and print out the results.
         //    You need to complete the computeTime method in the Racecar class based
         //    on the assignment directions.
-        double WebberET = Webber.computeTime();
-        double SennaET = Senna.computeTime();
         
         // 5. Print finishing times of both cars.
         System.out.println(Webber.name + ": ");
         System.out.println("\tWeight: " + Webber.weight);
         System.out.println("\tPower: " + Webber.power);
-        System.out.println("\tFinish time: " + WebberET + "\n");
+        System.out.println("\tFinish time: " + Webber.computeTime() + "\n");
 
         System.out.println(Senna.name + ": ");
         System.out.println("\tWeight: " + Senna.weight);
         System.out.println("\tPower: " + Senna.power);
-        System.out.println("\tFinish time: " + SennaET);
+        System.out.println("\tFinish time: " + Senna.computeTime());
     }
 }
