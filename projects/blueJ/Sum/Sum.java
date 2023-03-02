@@ -4,6 +4,10 @@ public class Sum {
                         {4, 2, 53, 31, 765, 34},
                         {64235, 23, 522, 124, 42, 64}};
 
+        System.out.println("For Array " + array + "\n");
+        printArray(array);
+        System.out.println("\nSum of Row 0: " + sumRow(array, 0));
+        System.out.println("Sum of Column 0: " + sumColumn(array, 0));
     }
     
     // Assuming the user of sumRow knows that array indices start at 0
@@ -25,4 +29,14 @@ public class Sum {
 
         return sum;
     }
+
+    public static void printArray(int[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.print(array[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
 }
+

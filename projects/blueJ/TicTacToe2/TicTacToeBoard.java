@@ -1,10 +1,8 @@
-import java.util.Scanner;
-
-public class TicTacToe {
+public class TicTacToeBoard {
     private String[][] board;
     private int turn;
     
-    public TicTacToe() {
+    public TicTacToeBoard() {
         board = new String[3][3];
         turn = 0; // X's turn
     }
@@ -12,9 +10,13 @@ public class TicTacToe {
     public int getTurn() {
         return turn;
     }
+    public String[][] getBoard() {
+        return board;
+    }
     
     public void printBoard() {
         // Finish this method to match the output in the directions!
+        System.out.println();
         System.out.println("  0 1 2");
 
         for (int r = 0; r < board.length; r++) {
@@ -25,22 +27,23 @@ public class TicTacToe {
             }
             System.out.println();
         }
+        System.out.println();
     }
     
-    public boolean pickLocation(int row, int column) {
-        return row < board.length && column < board.length && board[row][column] != "X" && board[row][column] != "O";
+    public boolean pickLocation(int row, int col) {
+        return row < board.length && col < board.length && board[row][col] != "X" && board[row][col] != "O";
     }
 
-    public void takeTurn(int row, int column) {
-        if (pickLocation(row, column)) {
+    public void takeTurn(int row, int col) {
+        if (pickLocation(row, col)) {
             if (turn % 2 == 0) {
-                board[row][column] = "X";
+                board[row][col] = "X";
             } else {
-                board[row][column] = "O";
+                board[row][col] = "O";
             }
             turn++;
         } else {
-            System.out.println("Not a valid position. Please try again!");
+            System.out.println("Error: not a valid position. Please try again!");
         }
     }
 
@@ -98,32 +101,5 @@ public class TicTacToe {
         } else {
             return (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O") || (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O");
         }
-    }
-    public static void main(String[] args) {
-        TicTacToe game = new TicTacToe();
-        Scanner input = new Scanner(System.in);
-
-        for (int i = 0; i < game.board.length; i++) {
-            for (int j = 0; j < game.board.length; j++) {
-                game.board[i][j] = "-";
-            }
-        }
-        
-        while (true) {
-            System.out.println("Player " + ((game.turn % 2) + 1) + ": Enter your choice's row");
-            int row = input.nextInt();
-            System.out.println("Enter your choice's column");
-            int column = input.nextInt();
-            
-            game.takeTurn(row, column);
-            game.printBoard();
-
-            if (game.checkWin((game.turn - 1))) {
-                System.out.println("Player " + (((game.turn - 1) % 2) + 1) + " wins!");
-                break;
-            }
-        }
-        input.close();
-        // Test your other methods here as well!
     }
 }
