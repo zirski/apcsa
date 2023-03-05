@@ -112,7 +112,6 @@ public class TicTacToe {
         while (true) {
             System.out.println("Player " + ((game.turn % 2) + 1) + ": Enter your choice's row");
             int row = input.nextInt();
-            System.out.println("Enter your choice's column");
             int column = input.nextInt();
             
             game.takeTurn(row, column);
