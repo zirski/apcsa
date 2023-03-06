@@ -10,15 +10,12 @@ public class TicTacToeBoard {
     public int getTurn() {
         return turn;
     }
+
     public String[][] getBoard() {
         return board;
     }
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
     
     public void printBoard() {
-        // Finish this method to match the output in the directions!
         System.out.println();
         System.out.println("  0 1 2");
 
@@ -37,48 +34,63 @@ public class TicTacToeBoard {
         return row < board.length && col < board.length && board[row][col] != "X" && board[row][col] != "O";
     }
 
-    public int takeTurn(int row, int col) {
-        if (checkTie()) {
-            if (pickLocation(row, col)) {
-                if (turn % 2 == 0) {
-                    board[row][col] = "X";
-                } else {
-                    board[row][col] = "O";
-                }
-                turn++;
-                return 2;
-                //first case; turn finishes as normal
+    /*
+     * the "throws ..." statement here indicates that this method may fail, but the
+     * reasons for such wouldn't normally cause the program to crash. To do this, 
+     * I made custom exceptions which are thrown if certain conditions are met (such 
+     * as if the game is won or tied). I found this method a lot more readable than 
+     * the alternative, which would be to put all of this logic inside the main method. 
+     */
+    public void takeTurn(int row, int col) throws GameHasTiedException, InvalidPositionException, GameIsWonException {
+        /*
+         * it's really important to first update the board, and THEN evaluate it for 
+         * win, tie, etc. Otherwise off-by-one errors can occur.
+         */
+        if (pickLocation(row, col)) {
+            //first case; turn finishes as normal
+            if (turn % 2 == 0) {
+                board[row][col] = "X";
             } else {
-                System.out.println("Error: not a valid position. Please try again!");
-                //second case; if a player has inputted an invalid position
-                return 1;
+                board[row][col] = "O";
             }
         } else {
-            //last case; if a player has already won
-            return 0;
+            //second case; if a player has inputted an invalid position
+            throw new InvalidPositionException();
         }
+        if (checkWin(turn)) {
+            //third case; if the game is won due to this input
+            throw new GameIsWonException();
+        } 
+        if (checkTie()) {
+            //fourth case; if the game is tied due to this input
+            throw new GameHasTiedException();
+        }
+        turn++;
     }
-
+    
+    /*
+     * checkTie() checks for ties by checking if there is only one unused tile (a sure sign of a tie). 
+     * Checking for a tie when each player is "perfect", that is using the optimal move which 
+     * guarantees the best chance of a win, is futile, as TicTacToe is a deterministic game
+     * (as I discovered after googling it). Maybe a cool extension assignment would be to 
+     * simulate games and graph the length of each game based on different starting moves, like a game tree.
+     */
+    public boolean checkTie() {
+        int matches = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == "-") {
+                    matches++;
+                }
+            }
+        }
+        return matches < 2;
+    }
+    
     public boolean checkWin(int turn) {
         return checkColumn(turn) || checkRow(turn) || checkDiag(turn);
     }
-
-    public boolean checkTie() {
-        if (!checkWin(turn - 1)) {
-            int matches = 0;
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board[i].length; j++) {
-                    if (board[i][j] == "-") {
-                        matches++;
-                    }
-                }
-            }
-            return matches < 2;
-        } else {
-            return false;
-        }
-    }
-
+    
     public boolean checkColumn(int turn) {
         if (turn % 2 == 0) {
             for (int i = 0; i < board.length; i++) {
@@ -129,5 +141,29 @@ public class TicTacToeBoard {
         } else {
             return (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O") || (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O");
         }
+    }
+}
+
+/*
+ * these are the aforementioned custom exceptions for the takeTurn method.
+ * Turns out implementing your own exceptions is really easy, because
+ * `Exception` is just an class, so you can extend it into a subclass and
+ * use it with no fuss.
+ */
+class GameHasTiedException extends Exception {
+    public GameHasTiedException() {
+        super();
+    }
+}
+
+class InvalidPositionException extends Exception {
+    public InvalidPositionException() {
+        super();
+    }
+}
+
+class GameIsWonException extends Exception {
+    public GameIsWonException() {
+        super();
     }
 }
