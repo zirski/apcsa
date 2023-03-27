@@ -1,4 +1,4 @@
-public class AirlineTicket implements Comparable<AirlineTicket> {
+public class AirlineTicket {
     private String[] seats = {"A","B","C","D","E","F"};
     private String name;
     private String seat;
@@ -43,15 +43,5 @@ public class AirlineTicket implements Comparable<AirlineTicket> {
     
     public String toString() {
         return name + " Seat: " + seat + " Row: " + row + " Boarding Group: " + boardingGroup;
-    }
-
-    public int compareTo(AirlineTicket a) {
-        if (this.row == a.row) {
-            return 0;
-        } else if (this.row < a.row ) {
-            return -1;
-        } else {
-            return 1;
-        }
     }
 }

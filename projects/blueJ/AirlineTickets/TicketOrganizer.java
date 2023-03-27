@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class TicketOrganizer{
@@ -38,16 +40,17 @@ public class TicketOrganizer{
                  */
                 sortedTickets.put(ticket.getBoardingGroup(), new ArrayList<>());
                 sortedTickets.get(ticket.getBoardingGroup()).add(ticket);
+                Collections.sort(sortedTickets.get(ticket.getBoardingGroup()), new AirlineTicketComparator());
             }
         }
         
-        //iterates through the keys in the hashmap
+        //prints each boarding group number before printing its contents
         for (int k : sortedTickets.keySet()) {
             System.out.println("Boarding Group " + k);
 
             //iterates through all the tickets in each boarding group and prints
             for (AirlineTicket ticket : sortedTickets.get(k)) {
-                System.out.println(ticket.getName() + ": Row " + ticket.getRow());
+                System.out.println(ticket.getName() + " Row: " + ticket.getRow());
             }
         }
     }
@@ -67,5 +70,12 @@ public class TicketOrganizer{
             System.out.println("None.");
         }
         System.out.println();
+    }
+}
+
+class AirlineTicketComparator implements Comparator<AirlineTicket> {
+    @Override
+    public int compare(AirlineTicket a1, AirlineTicket a2) {
+        return a1.getRow() - a2.getRow();
     }
 }

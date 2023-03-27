@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AirlineTicketTester {
     public static void main(String[] args) {
@@ -8,7 +9,7 @@ public class AirlineTicketTester {
         for (AirlineTicket elem: tickets) {
             System.out.println(elem);
         }
-       //This creates a TicketOrganizer object
+        //This creates a TicketOrganizer object
         TicketOrganizer ticketOrganizer = new TicketOrganizer(tickets);
         
         //These are the methods of the ticketOrganizer in action
@@ -26,6 +27,7 @@ public class AirlineTicketTester {
             AirlineTicket ticket = new AirlineTicket("Passenger " + (index+1), seats[random], ((int)(Math.random()*5)+1), ((int)(Math.random()*8)+1));
             tickets.add(ticket);
         }
+        Collections.shuffle(tickets);
     }
     
 }
